@@ -1,0 +1,86 @@
+{
+  "info": {
+    "_postman_id": "402905b9-fb3d-4757-9b42-2321d3f41cf1",
+    "name": "DDT_COLLECTION",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57171390",
+    "_collection_link": "https://go.postman.co/collection/57171390-402905b9-fb3d-4757-9b42-2321d3f41cf1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "DDT",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "pm.environment.set(\"firstname\", pm.iterationData.get(\"firstname\"));\r",
+              "pm.environment.set(\"lastname\",  pm.iterationData.get(\"lastname\"));\r",
+              "pm.environment.set(\"totalprice\", pm.iterationData.get(\"totalprice\"));\r",
+              "pm.environment.set(\"depositpaid\",  pm.iterationData.get(\"depositpaid\"));\r",
+              "pm.environment.set(\"checkin\",  pm.iterationData.get(\"checkin\"));\r",
+              "pm.environment.set(\"checkout\",  pm.iterationData.get(\"checkout\"));\r",
+              "pm.environment.set(\"additionalneeds\",pm.iterationData.get(\"additionalneeds\"));\r",
+              " \r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Status Code Check\r",
+              "pm.test(\"Status code is 201 OK\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "// Response Time Check (Within 3 seconds)\r",
+              "pm.test(\"Response time is under 3000ms\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+              "});\r",
+              "\r",
+              "// Response Size Check (Under 1500 bytes)\r",
+              "pm.test(\"Response size is under 900 bytes\", function () {\r",
+              "    pm.expect(pm.response.responseSize).to.be.below(900);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\t\"firstname\" : \"{{firstname}}\",\r\n\t\"lastname\" :  \"{{lastname}}\",\r\n\t\"totalprice\" :  \"{{totalprice}}\",\r\n\t\"depositpaid\" :  \"{{depositpaid}}\",\r\n\t\"bookingdates\" : {\r\n    \t\"checkin\" :  \"{{checkin}}\",\r\n    \t\"checkout\" : \"{{checkout}}\"\r\n\t},\r\n\t\"additionalneeds\" :  \"{{additionalneeds}}\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://restful-booker.herokuapp.com/booking/",
+          "protocol": "https",
+          "host": [
+            "restful-booker",
+            "herokuapp",
+            "com"
+          ],
+          "path": [
+            "booking",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
